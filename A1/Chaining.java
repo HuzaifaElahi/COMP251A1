@@ -42,6 +42,7 @@ public class Chaining {
      * Inserts key k into hash table. Returns the number of collisions
      * encountered
      */
+    //TODO : Do we need to add at START of the list?
     public int insertKey(int key) {
         //ADD YOUR CODE HERE (chane return statement)
     	int hashValue = chain(key);
