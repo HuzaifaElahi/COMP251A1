@@ -157,9 +157,18 @@ public class main {
 
 		int[] wList = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
 		int[] nListRand = new int [32];
-
-		for(int i = 0 ; i < 32 ; i++) {
-			nListRand[i] = generateRandom(0,55,-1);
+		ArrayList<Integer> keysAdded = new ArrayList<Integer>();
+		int i = 0;
+		while(keysAdded.size() < 32) {
+			int randInt =  generateRandom(0,55,-1);
+			if(!keysAdded.contains(randInt)) {
+				keysAdded.add(randInt);
+				nListRand[i] = randInt;
+				i++;
+			}
+			else {
+				continue;
+			}
 		}
 
 		for(int wTest : wList) {
