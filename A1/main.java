@@ -102,9 +102,9 @@ public class main {
 				chainCollision += MyChainTable.insertKey(keysToInsert[index]);
 				probeCollision += MyProbeTable.insertKey(keysToInsert[index]);
 			}
-			alphaList.add((double) (n+1/nList.length));
-			avColListChain.add((double) (chainCollision/n+1));  
-			avColListProbe.add((double) (probeCollision/n+1));  
+			alphaList.add((n/((double)MyChainTable.m)));
+			avColListChain.add((chainCollision/((double)n)));  
+			avColListProbe.add((probeCollision/((double)n)));  
 
 
 			//ADD YOUR CODE HERE
@@ -133,10 +133,9 @@ public class main {
 		}
 		for(int key : keysToRemove) {
 			index = MyProbeTableRemove.removeKeyIndex(key);
-			removeCollisionsVal += MyProbeTableRemove.removeKey(key);
+			removeCollisionsVal = MyProbeTableRemove.removeKey(key);
 			removeCollisions.add(removeCollisionsVal);
 			removeIndex.add(index);
-
 		}
 
 
@@ -163,9 +162,9 @@ public class main {
 				chainCollision += MyChainTableTask3.insertKey(keysToInsert[indexTask3]);
 				probeCollision += MyProbeTableTask3.insertKey(keysToInsert[indexTask3]);
 			}
-			alphaList2.add((double) (16+1/nList.length));
-			avColListChain2.add((double) (chainCollision/16+1));  
-			avColListProbe2.add((double) (probeCollision/16+1));  
+			alphaList2.add((16/(double) nList.length));
+			avColListChain2.add((chainCollision/((double)16)));  
+			avColListProbe2.add((probeCollision/((double)16)));  
 		//ADD YOUR CODE HERE
 		generateCSVOutputFile("w_comparison.csv", alphaList2, avColListChain2, avColListProbe2);
 

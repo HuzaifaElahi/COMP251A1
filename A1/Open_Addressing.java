@@ -57,7 +57,8 @@ public class Open_Addressing {
 				foundIt = true;
 			} 
 			else {
-				hashValue = probe(key, i++);
+				i++;
+				hashValue = probe(key, i);
 				continue;
 			}
 		}
@@ -75,17 +76,24 @@ public class Open_Addressing {
 		boolean foundIt = false;
 		int hashValue = probe(key, i);
 		int collisions = 0;
-		while(!foundIt && i <= m-1) {
-			if(!isSlotEmpty(hashValue)) {
+		while(!foundIt && i < m) {
+			if(key == Table[hashValue]) {
 				Table[hashValue] = -1;
 				foundIt = true;
 			} 
 			else {
-				hashValue = probe(key, i++);
+				//collision
+				if(!isSlotEmpty(hashValue)) {
+					collisions++;
+				}
+				i++;
+				hashValue = probe(key, i);
 				continue;
 			}
 		}
-		collisions = i;
+		if(!foundIt) {
+			hashValue = -1;
+		}
 		return collisions;
 	}
 	
@@ -101,15 +109,18 @@ public class Open_Addressing {
 		int i = 0;
 		boolean foundIt = false;
 		int hashValue = probe(key, i);
-		while(!foundIt && i <= m-1) {
-			if(!isSlotEmpty(hashValue)) {
-			//	Table[hashValue] = -1;
+		while(!foundIt && i < m) {
+			if(key == Table[hashValue]) {
 				foundIt = true;
 			} 
 			else {
-				hashValue = probe(key, i++);
+				i++;
+				hashValue = probe(key, i);
 				continue;
 			}
+		}
+		if(!foundIt) {
+			hashValue = -1;
 		}
 		return hashValue;
 	}
