@@ -58,10 +58,10 @@ public class Open_Addressing {
 			} 
 			else {
 				// Already inserted
-		    	if(Table[hashValue] == key) {
-		    		return i;
-		    	}
-		    	// Else continue
+				if(Table[hashValue] == key) {
+					return i;
+				}
+				// Else continue
 				i++;
 				hashValue = probe(key, i);
 				continue;
@@ -82,52 +82,27 @@ public class Open_Addressing {
 		int hashValue = probe(key, i);
 		int collisions = 0;
 		while(!foundIt && i < m) {
+			// Key found
 			if(key == Table[hashValue]) {
-				Table[hashValue] = -1;
+				Table[hashValue] = -2;
 				foundIt = true;
 			} 
+			// Key not found
 			else {
-				//collision
-				if(!isSlotEmpty(hashValue)) {
-					collisions++;
+				// Empty (unreachable)
+				if(isSlotEmpty(hashValue)) {
+					break;
 				}
-				i++;
-				hashValue = probe(key, i);
-				continue;
+				// Keep looking
+				else {
+					i++;
+					collisions++;
+					hashValue = probe(key, i);
+					continue;
+				}
 			}
-		}
-		if(!foundIt) {
-			hashValue = -1;
 		}
 		return collisions;
-	}
-	
-	
-	
-	
-	/**
-	 * Returns the index of the
-	 * key removed
-	 */
-	public int removeKeyIndex(int key) {
-		//ADD YOUR CODE HERE (CHANGE THE RETURN STATEMENT)
-		int i = 0;
-		boolean foundIt = false;
-		int hashValue = probe(key, i);
-		while(!foundIt && i < m) {
-			if(key == Table[hashValue]) {
-				foundIt = true;
-			} 
-			else {
-				i++;
-				hashValue = probe(key, i);
-				continue;
-			}
-		}
-		if(!foundIt) {
-			hashValue = -1;
-		}
-		return hashValue;
 	}
 
 }
