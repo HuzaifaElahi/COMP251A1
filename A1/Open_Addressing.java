@@ -56,18 +56,19 @@ public class Open_Addressing {
 				Table[hashValue] = key;
 				foundIt = true;
 			} 
+			// Not empty
 			else {
 				// Already inserted
 				if(Table[hashValue] == key) {
-					return i;
+					return collisions;
 				}
-				// Else continue
+				// Else continue looking
 				i++;
+				collisions++;
 				hashValue = probe(key, i);
 				continue;
 			}
 		}
-		collisions = i;
 		return collisions;
 	}
 
@@ -84,12 +85,13 @@ public class Open_Addressing {
 		while(!foundIt && i < m) {
 			// Key found
 			if(key == Table[hashValue]) {
+				// Place -2 instead of -1 to show removed
 				Table[hashValue] = -2;
 				foundIt = true;
 			} 
 			// Key not found
 			else {
-				// Empty (unreachable)
+				// Empty (key we want is unreachable)
 				if(isSlotEmpty(hashValue)) {
 					break;
 				}

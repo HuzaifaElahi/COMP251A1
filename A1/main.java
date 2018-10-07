@@ -127,7 +127,7 @@ public class main {
 
 		Open_Addressing MyProbeTableRemove = new Open_Addressing(w, 137);
 		double removeCollisionsVal = 0;
-		for(int insertIndex = 0; insertIndex < 16 ; insertIndex++) {
+		for(int insertIndex = 0; insertIndex < keysToRemove.length ; insertIndex++) {
 			MyProbeTableRemove.insertKey(keysToInsert[insertIndex]);
 		}
 		for(int i = 0; i < keysToRemove.length ; i++) {
