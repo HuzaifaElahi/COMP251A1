@@ -127,15 +127,14 @@ public class main {
 
 		Open_Addressing MyProbeTableRemove = new Open_Addressing(w, 137);
 		double removeCollisionsVal = 0;
-		double index = 0;
 		for(int insertIndex = 0; insertIndex < 16 ; insertIndex++) {
 			MyProbeTableRemove.insertKey(keysToInsert[insertIndex]);
 		}
-		for(int key : keysToRemove) {
-			index = MyProbeTableRemove.removeKeyIndex(key);
+		for(int i = 0; i < keysToRemove.length ; i++) {
+			int key = keysToRemove[i];
 			removeCollisionsVal = MyProbeTableRemove.removeKey(key);
 			removeCollisions.add(removeCollisionsVal);
-			removeIndex.add(index);
+			removeIndex.add((double)i);
 		}
 
 
@@ -171,8 +170,8 @@ public class main {
 			int chainCollision = 0;
 			int probeCollision = 0;
 			for(int indexTask3 = 0 ; indexTask3 < nListRand.length ; indexTask3++) {
-				chainCollision += MyChainTableTask3.insertKey(keysToInsert[indexTask3]);
-				probeCollision += MyProbeTableTask3.insertKey(keysToInsert[indexTask3]);
+				chainCollision += MyChainTableTask3.insertKey(nListRand[indexTask3]);
+				probeCollision += MyProbeTableTask3.insertKey(nListRand[indexTask3]);
 			}
 			alphaList2.add((nListRand.length/((double)MyChainTableTask3.m)));
 			avColListChain2.add((chainCollision/((double)nListRand.length)));  

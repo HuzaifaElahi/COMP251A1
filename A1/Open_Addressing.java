@@ -50,13 +50,18 @@ public class Open_Addressing {
 		boolean foundIt = false;
 		int hashValue = probe(key, i);
 		int collisions = 0;
-		while(!foundIt) {
+		while(!foundIt && i < m) {
 			// Empty Slot
 			if(isSlotEmpty(hashValue)) {
 				Table[hashValue] = key;
 				foundIt = true;
 			} 
 			else {
+				// Already inserted
+		    	if(Table[hashValue] == key) {
+		    		return i;
+		    	}
+		    	// Else continue
 				i++;
 				hashValue = probe(key, i);
 				continue;

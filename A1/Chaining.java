@@ -52,6 +52,7 @@ public class Chaining {
     	} 
     	// Already inserted
     	else if(Table.get(hashValue).contains(key)) {
+    		collisions = Table.get(hashValue).size();
     		return collisions;
     	}
     	// Add and count collisions
