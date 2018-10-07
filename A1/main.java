@@ -148,26 +148,37 @@ public class main {
 		 */
 		//generating random hash tables with no seed can be done by sending -1
 		//as the seed. You can read the generateRandom method for detail.
-		int randomNumber = generateRandom(0,55,-1);
-		Chaining MyChainTableTask3 = new Chaining(8, -1);
-		Open_Addressing MyProbeTableTask3 = new Open_Addressing(8, -1);
+		//int randomNumber = generateRandom(0,55,-1);
+		//Chaining MyChainTableTask3 = new Chaining(8, -1);
+		//Open_Addressing MyProbeTableTask3 = new Open_Addressing(8, -1);
 		//Lists to fill for the output CSV, exactly the same as in Task 1.
 		ArrayList<Double> alphaList2 = new ArrayList<Double>();
 		ArrayList<Double> avColListChain2 = new ArrayList<Double>();
 		ArrayList<Double> avColListProbe2 = new ArrayList<Double>();
 
+		int[] wList = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+		int[] nListRand = new int [32];
+
+		for(int i = 0 ; i < 32 ; i++) {
+			nListRand[i] = generateRandom(0,55,-1);
+		}
+
+		for(int wTest : wList) {
+
+			Chaining MyChainTableTask3 = new Chaining(wTest, -1);
+			Open_Addressing MyProbeTableTask3 = new Open_Addressing(wTest, -1);
+
 			int chainCollision = 0;
 			int probeCollision = 0;
-			for(int indexTask3 = 0 ; indexTask3 < 16 ; indexTask3++) {
+			for(int indexTask3 = 0 ; indexTask3 < nListRand.length ; indexTask3++) {
 				chainCollision += MyChainTableTask3.insertKey(keysToInsert[indexTask3]);
 				probeCollision += MyProbeTableTask3.insertKey(keysToInsert[indexTask3]);
 			}
-			alphaList2.add((16/(double) nList.length));
-			avColListChain2.add((chainCollision/((double)16)));  
-			avColListProbe2.add((probeCollision/((double)16)));  
+			alphaList2.add((nListRand.length/((double)MyChainTableTask3.m)));
+			avColListChain2.add((chainCollision/((double)nListRand.length)));  
+			avColListProbe2.add((probeCollision/((double)nListRand.length)));  
+		}
 		//ADD YOUR CODE HERE
 		generateCSVOutputFile("w_comparison.csv", alphaList2, avColListChain2, avColListProbe2);
-
 	}
-
 }
