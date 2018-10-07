@@ -93,6 +93,7 @@ public class Open_Addressing {
 			else {
 				// Empty (key we want is unreachable)
 				if(isSlotEmpty(hashValue)) {
+					collisions++;
 					break;
 				}
 				// Keep looking
