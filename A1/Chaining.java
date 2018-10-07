@@ -49,7 +49,7 @@ public class Chaining {
     	int collisions = 0;
     	// No Collision
     	if(isSlotEmpty(hashValue)) {
-    		Table.get(hashValue).add(key);
+    		Table.get(hashValue).add(0, key);
     	} 
     	// Already inserted
     	else if(Table.get(hashValue).contains(key)) {
@@ -59,7 +59,7 @@ public class Chaining {
     	// Add and count collisions
     	else {
     		collisions = Table.get(hashValue).size();
-    		Table.get(hashValue).add(key);
+    		Table.get(hashValue).add(0, key);
     	}
         return collisions;
     }
