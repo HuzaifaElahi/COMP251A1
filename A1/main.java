@@ -155,7 +155,10 @@ public class main {
 		ArrayList<Double> avColListChain2 = new ArrayList<Double>();
 		ArrayList<Double> avColListProbe2 = new ArrayList<Double>();
 
+		// Initialize w list
 		int[] wList = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+
+		// Add 32 random and unique keys to nListRand, an array of random keys
 		int[] nListRand = new int [32];
 		ArrayList<Integer> keysAdded = new ArrayList<Integer>();
 		int i = 0;
@@ -170,21 +173,30 @@ public class main {
 				continue;
 			}
 		}
-
+		
+		// For each w in wList, create 10 HashTables of each type, measure collisions, take average
 		for(int wTest : wList) {
-
-			Chaining MyChainTableTask3 = new Chaining(wTest, -1);
-			Open_Addressing MyProbeTableTask3 = new Open_Addressing(wTest, -1);
-
 			int chainCollision = 0;
 			int probeCollision = 0;
-			for(int indexTask3 = 0 ; indexTask3 < nListRand.length ; indexTask3++) {
-				chainCollision += MyChainTableTask3.insertKey(nListRand[indexTask3]);
-				probeCollision += MyProbeTableTask3.insertKey(nListRand[indexTask3]);
+			int alpha = 0;
+			Chaining MyChainTableTask3 = null;
+			Open_Addressing MyProbeTableTask3 = null;
+			
+			// Test each w 10 times 
+			for(int index = 0; index < 10 ; index++) {
+				MyChainTableTask3 = new Chaining(wTest, -1);
+				MyProbeTableTask3 = new Open_Addressing(wTest, -1);
+				for(int indexTask3 = 0 ; indexTask3 < nListRand.length ; indexTask3++) {
+					chainCollision += MyChainTableTask3.insertKey(nListRand[indexTask3]);
+					probeCollision += MyProbeTableTask3.insertKey(nListRand[indexTask3]);
+				}
+				alpha += MyChainTableTask3.m;
 			}
-			alphaList2.add((nListRand.length/((double)MyChainTableTask3.m)));
-			avColListChain2.add((chainCollision/((double)nListRand.length)));  
-			avColListProbe2.add((probeCollision/((double)nListRand.length)));  
+			
+			// Take average of the readings of the 10 runs per w to add to the data
+			alphaList2.add((nListRand.length/((double)alpha/10)));
+			avColListChain2.add(((chainCollision/10)/((double)nListRand.length)));  
+			avColListProbe2.add(((probeCollision/10)/((double)nListRand.length)));  
 		}
 		//ADD YOUR CODE HERE
 		generateCSVOutputFile("w_comparison.csv", alphaList2, avColListChain2, avColListProbe2);
