@@ -158,24 +158,25 @@ public class main {
 		// Initialize w list
 		int[] wList = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
 
-		// Add 32 random and unique keys to nListRand, an array of random keys
-		int[] nListRand = new int [32];
-		ArrayList<Integer> keysAdded = new ArrayList<Integer>();
-		int i = 0;
-		while(keysAdded.size() < 32) {
-			int randInt =  generateRandom(0,55,-1);
-			if(!keysAdded.contains(randInt)) {
-				keysAdded.add(randInt);
-				nListRand[i] = randInt;
-				i++;
-			}
-			else {
-				continue;
-			}
-		}
-		
 		// For each w in wList, create 10 HashTables of each type, measure collisions, take average
 		for(int wTest : wList) {
+			
+			// Add 32 random and unique keys to nListRand, an array of random keys
+			int[] nListRand = new int [32];
+			ArrayList<Integer> keysAdded = new ArrayList<Integer>();
+			int i = 0;
+			while(keysAdded.size() < 32) {
+				int randInt =  generateRandom(0,55,-1);
+				if(!keysAdded.contains(randInt)) {
+					keysAdded.add(randInt);
+					nListRand[i] = randInt;
+					i++;
+				}
+				else {
+					continue;
+				}
+			}
+			
 			int chainCollision = 0;
 			int probeCollision = 0;
 			int alpha = 0;
